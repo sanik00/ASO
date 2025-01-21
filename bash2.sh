@@ -1,18 +1,22 @@
 #!/bin/bash
-while [[ $opcion != 4 ]]; do
+while [[ true ]]; do
 echo -e "Introduce una opción (1, 2, 3 o 4):"
-for opcion in {!= 1..4} ; do
+read opcion
+while [[ $opcion -le 0 || $opcion -gt 4 ]]; do
+	echo "Ese no es un número de opción permitido"
+	echo "Introduce un número de opción válido (1,2,3 o 4)"
 	read opcion
-	echo "No has introducido una opción válida, vuelve a intentarlo"
 done
 case $opcion in
 	1)
-		for num in {1..100}; do
-			echo "Número: $num"
+		suma=0
+		for ((i=1;i<=100; i++)); do
+			suma=$((suma+i))
 		done
+		echo -e "La suma de todos los números del 1 al 100 es: $suma\n"
 		;;
 	2)
-		echo "Introduce un número para mostrar su tabla de multiplicar"
+		echo -e "Introduce un número para mostrar su tabla de multiplicar\n"
 		read num
 		echo ""
 
@@ -25,22 +29,22 @@ case $opcion in
 		echo "Introduce un archivo"
                 read archivo
                 if [[ -e "$archivo" ]]; then
-                        echo "Se ha encontrado el archivo $archivo"
+                        echo -e "Se ha encontrado el archivo $archivo\n"
 			if [[ -r "$archivo" ]]; then
-				echo "El archivo tiene permisos de lectura"
+				echo -e "El archivo tiene permisos de lectura\n"
 			else
-				echo "El archivo no tiene permisos de lectura"
+				echo -e "El archivo no tiene permisos de lectura\n"
 			fi
 			if [[ -w "$archivo" ]]; then
-				echo "El archivo tiene permisos de escritura"
+				echo -e "El archivo tiene permisos de escritura\n"
 			else
-				echo "El archivo no tiene permisos de escritura"
+				echo -e "El archivo no tiene permisos de escritura\n"
 			fi
                 else
-                        echo "No se ha encontrado el archivo $archivo en el directorio actual"
+                        echo -e "No se ha encontrado el archivo $archivo en el directorio actual\n"
                 fi
                 ;;
-	4)
+	4)	echo -e "\nHasta luego, gracias"
 		exit
 		;;
 esac
